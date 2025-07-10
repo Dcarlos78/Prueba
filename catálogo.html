@@ -2,35 +2,120 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>MOTOREPUESTOS TACO</title>
+  <title>Catálogo - Llaves</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
-     body{
-  background-color: rgb(245, 245, 245); 
-     }
-  h1{
-    text-align:center;
-    text-decoration:underline;
-    font-family:'Bebas Neue',sans-serif;
-    color:#333;
-  }
-  h2{
-    font-family:'Bebas Neue',sans-serif;
-    color:black;
-  }
+    body {
+      background-color: rgb(245, 245, 245); 
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      text-decoration: underline;
+      color: #333;
+    }
+
+    h2 {
+      color: black;
+    }
+
+    section {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      background-color: #fff;
+      max-width: 800px;
+    }
+
+    .carrusel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carrusel {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 10px 0;
+    }
+
+    .carrusel img {
+      width: 150px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .boton {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 18px;
+      z-index: 1;
+    }
+
+    .izquierda {
+      left: 0;
+    }
+
+    .derecha {
+      right: 0;
+    }
   </style>
 </head>
 <body>
   <h1>Catálogo</h1>
-  <section style="border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px auto;
-  background-color: #fff;
-  max-width: 800px;
-">
+
+  <section>
     <h2>Llaves</h2>
-    <p>En esta seccion encontras llaves al<br>mejor precio</p>
+    <p>En esta sección encontrarás llaves al mejor precio</p>
+
+    <div class="carrusel-container">
+      <button class="boton izquierda" onclick="moverCarrusel(-1)">←</button>
+      <div class="carrusel" id="carrusel">
+        <img src="https://i.postimg.cc/1tT4xpRY/image-Url-1.jpg" alt="Llave 1" onclick="irAWhatsapp('Llave iglesa')">
+        <img src="https://i.postimg.cc/fL7H8gTx/image-Url-2.jpg" alt="Llave 2">
+        <img src="https://i.postimg.cc/6pV9C0Lc/image-Url-3.jpg" alt="Llave 3">
+        <img src="https://i.postimg.cc/8zWKV5zk/image-Url-4.jpg" alt="Llave 4">
+        <img src="https://i.postimg.cc/3NcRMQny/image-Url-5.jpg" alt="Llave 5">
+      </div>
+      <button class="boton derecha" onclick="moverCarrusel(1)">→</button>
+    </div>
   </section>
+    <script>
+  // Función para mover el carrusel
+  function moverCarrusel(direccion) {
+    const carrusel = document.getElementById('carrusel');
+    const ancho = 170;
+    carrusel.scrollBy({
+      left: direccion * ancho,
+      behavior: 'smooth'
+    });
+  }
+
+  // Función para enviar mensaje a WhatsApp
+  function irAWhatsapp(producto) {
+    const mensaje = `Nombre: Introducir nombre%0A` +
+                    `Dirección: Introducir dirección%0A` +
+                    `Quiero comprar: ${producto}`;
+    
+    const numero = '51925317193'; // Reemplaza con tu número
+    const url = `https://wa.me/${numero}?text=${mensaje}`;
+    
+    window.open(url, '_blank');
+  }
+</script>
 </body>
 </html>

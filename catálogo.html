@@ -2,23 +2,22 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Catálogo - Llaves</title>
+  <title>MOTOREPUESTOS TACO</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      background-color: rgb(245, 245, 245); 
-      margin: 0;
+      background-color: rgb(245, 245, 245);
       font-family: 'Bebas Neue', sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
       text-align: center;
       text-decoration: underline;
       color: #333;
-    }
-
-    h2 {
-      color: black;
+      margin-top: 20px;
     }
 
     section {
@@ -27,95 +26,119 @@
       padding: 20px;
       margin: 20px auto;
       background-color: #fff;
-      max-width: 800px;
+      max-width: 900px;
     }
 
-    .carrusel-container {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      color: black;
     }
 
     .carrusel {
       display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .flecha {
+      font-size: 2rem;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .galeria {
+      display: flex;
       overflow-x: auto;
       scroll-behavior: smooth;
-      gap: 20px;
-      padding: 10px 0;
+      gap: 15px;
+      max-width: 90vw;
+      padding: 10px;
     }
 
-    .carrusel img {
+    .galeria img {
       width: 150px;
       height: auto;
-      flex-shrink: 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    .boton {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 10px;
+      border-radius: 10px;
       cursor: pointer;
-      border-radius: 50%;
-      font-size: 18px;
-      z-index: 1;
+      transition: transform 0.2s;
     }
 
-    .izquierda {
-      left: 0;
+    .galeria img:hover {
+      transform: scale(1.1);
     }
-
-    .derecha {
-      right: 0;
-    }
+  .regreso{
+    display:inline-flex;
+    background-color:#4CAF50;
+    align-items:center;
+    gap:8px;
+    color:white;
+    border:none;
+    border-radius:5px;
+    padding:10px 15px;
+    cursor:pointer;
+  }
   </style>
 </head>
 <body>
   <h1>Catálogo</h1>
-
-  <section>
+  <a href="#Llaves">Llaves</a><br/>
+  <a href="#Luces">Luces</a><br/>
+  <a href="#Cadenas">Cadenas</a><br/>
+  <a href="#Productos-mantenimiento">Productos de mantenimiento🧼</a>
+  <!-- Sección de Llaves -->
+  <section id="Llaves">
     <h2>Llaves</h2>
-    <p>En esta sección encontrarás llaves al mejor precio</p>
+    <p>Elige una llave para comprar por WhatsApp</p>
 
-    <div class="carrusel-container">
-      <button class="boton izquierda" onclick="moverCarrusel(-1)">←</button>
-      <div class="carrusel" id="carrusel">
+    <div class="carrusel">
+      <button class="flecha" onclick="scrollIzquierda()">⬅️</button>
+
+      <div class="galeria" id="galeria">
         <img src="https://i.postimg.cc/1tT4xpRY/image-Url-1.jpg" alt="Llave 1" onclick="irAWhatsapp('Llave iglesa')">
         <img src="https://i.postimg.cc/852fX2dx/D-NQ-NP-744920-MPE69789581105-062023-O-llave-de-radios-de-6-vias-8427410.webp" alt="llave de radio" onclick="irAWhatsapp('llave de radio')">
         <img src="https://i.postimg.cc/qqtVqF9B/D-NQ-NP-872882-MLM43981513367-112020-O-llave-de-bujias-para-moto-dado-universal-10-12-14-mm.webp" alt="Llave universal" onclick="irAWhatsapp('llave universal')">
         <img src="https://i.postimg.cc/ZKRFBS7x/image-eec8e1f126f54a7bb887b49df86e696a.jpg" alt="Llave fija" onclick="irAWhatsapp('llave fija')">
         <img src="https://i.postimg.cc/5tMC3d3G/31310.png" alt="Llave de cadenas" onclick="irAWhatsapp('llave de cadenas')">
       </div>
-      <button class="boton derecha" onclick="moverCarrusel(1)">→</button>
+
+      <button class="flecha" onclick="scrollDerecha()">➡️</button>
     </div>
   </section>
-    <script>
-  // Función para mover el carrusel
-  function moverCarrusel(direccion) {
-    const carrusel = document.getElementById('carrusel');
-    const ancho = 170;
-    carrusel.scrollBy({
-      left: direccion * ancho,
-      behavior: 'smooth'
-    });
-  }
+  <section id="Luces">
+    <h2>LUCES</h2>
+  </section>
+  <section id="Cadenas">
+    <h3>CADENAS</h3>
+  </section>
+  <section id="Productos-mantenimiento">
+    <h3>Productos de mantenimiento</h3>
+    
+  </section>
+  <button onclick="window.location.href='inicio.html'" class="regreso"><i class="fas fa-door-open"></i>Regreso</button>
 
-  // Función para enviar mensaje a WhatsApp
-  function irAWhatsapp(producto) {
-    const mensaje = `Nombre: Introducir nombre%0A` +
-                    `Dirección: Introducir dirección%0A` +
-                    `Quiero comprar: ${producto}`;
-    
-    const numero = '51925317193'; // Reemplaza con tu número
-    const url = `https://wa.me/${numero}?text=${mensaje}`;
-    
-    window.open(url, '_blank');
-  }
-</script>
+  <script>
+    // Scroll horizontal
+    function scrollDerecha() {
+      document.getElementById("galeria").scrollBy({ left: 200, behavior: 'smooth' });
+    }
+
+    function scrollIzquierda() {
+      document.getElementById("galeria").scrollBy({ left: -200, behavior: 'smooth' });
+    }
+
+    // Función para enviar a WhatsApp
+    function irAWhatsapp(producto) {
+      const mensaje = `Nombre: Introducir nombre%0A` +
+                      `Dirección: Introducir dirección%0A` +
+                      `Quiero comprar: ${producto}`;
+
+      const numero = '51925317193'; // Reemplaza por tu número real
+      const url = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+  </script>
 </body>
 </html>

@@ -34,52 +34,51 @@
       font-size: 24px;
       color: black;
     }
+.carrusel-container {
+      position: relative;
+      width: 300px;
+      overflow: hidden;
+    }
 
     .carrusel {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      transition: transform 0.3s ease-in-out;
     }
 
-    .flecha {
-      font-size: 2rem;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
-
-    .galeria {
-      display: flex;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      gap: 15px;
-      max-width: 90vw;
+    .producto {
+      min-width: 100%;
+      box-sizing: border-box;
       padding: 10px;
     }
 
-    .galeria img {
-      width: 150px;
+    .producto img {
+      width: 100%;
       height: auto;
       border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
+      display: block;
+      margin: 0 auto;
     }
 
-    .galeria img:hover {
-      transform: scale(1.1);
+    .boton {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 50%;
     }
-  .regreso{
-    display:inline-flex;
-    background-color:#4CAF50;
-    align-items:center;
-    gap:8px;
-    color:white;
-    border:none;
-    border-radius:5px;
-    padding:10px 15px;
-    cursor:pointer;
-  }
+
+    .izquierda {
+      left: 10px;
+    }
+
+    .derecha {
+      right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -93,19 +92,25 @@
     <h2>Llaves</h2>
     <p>Elige una llave para comprar por WhatsApp</p>
 
-    <div class="carrusel">
-      <button class="flecha" onclick="scrollIzquierda()">⬅️</button>
-
-      <div class="galeria" id="galeria">
-        <img src="https://i.postimg.cc/1tT4xpRY/image-Url-1.jpg" alt="Llave 1" onclick="irAWhatsapp('Llave iglesa')">
-        <img src="https://i.postimg.cc/852fX2dx/D-NQ-NP-744920-MPE69789581105-062023-O-llave-de-radios-de-6-vias-8427410.webp" alt="llave de radio" onclick="irAWhatsapp('llave de radio')">
-        <img src="https://i.postimg.cc/qqtVqF9B/D-NQ-NP-872882-MLM43981513367-112020-O-llave-de-bujias-para-moto-dado-universal-10-12-14-mm.webp" alt="Llave universal" onclick="irAWhatsapp('llave universal')">
+    <div class="carrusel-container">
+    <button class="boton izquierda" onclick="moverCarrusel(-1)">‹</button>
+    <div class="carrusel" id="carrusel">
+      <div class="producto"><img src="https://i.postimg.cc/1tT4xpRY/image-Url-1.jpg" alt="Llave iglesa" onclick="irAWhatsapp('Llave iglesa')">
+      <h4 style="text-align:center;">Llave iglesa</h4>
+      <p style="text-align:center">s/ 20.00</p>
+    </div>
+      <div class="producto"><img src="https://i.postimg.cc/852fX2dx/D-NQ-NP-744920-MPE69789581105-062023-O-llave-de-radios-de-6-vias-8427410.webp" alt="Llave de radio de 6 vías" onclick="irAWhatsapp('Llave de radio de 6 vías')"></div>
+      <div class="producto"><img src="https://i.postimg.cc/qqtVqF9B/D-NQ-NP-872882-MLM43981513367-112020-O-llave-de-bujias-para-moto-dado-universal-10-12-14-mm.webp" alt="Llave universal" onclick="irAWhatsapp('llave universal')">
+        </div>
+        <div class="producto">
         <img src="https://i.postimg.cc/ZKRFBS7x/image-eec8e1f126f54a7bb887b49df86e696a.jpg" alt="Llave fija" onclick="irAWhatsapp('llave fija')">
+        </div> 
+     <div class="producto">
         <img src="https://i.postimg.cc/5tMC3d3G/31310.png" alt="Llave de cadenas" onclick="irAWhatsapp('llave de cadenas')">
       </div>
-
-      <button class="flecha" onclick="scrollDerecha()">➡️</button>
-    </div>
+      </div>
+    <button class="boton derecha" onclick="moverCarrusel(1)">›</button>
+  </div>
   </section>
   <section id="Luces">
     <h2>LUCES</h2>
@@ -117,18 +122,21 @@
     <h3>Productos de mantenimiento</h3>
     
   </section>
-  <button onclick="window.location.href='index.html'" class="regreso"><i class="fas fa-door-open"></i>Regreso</button>
+  <button onclick="window.location.href='inicio.html'" class="regreso"><i class="fas fa-door-open"></i>Regreso</button>
 
   <script>
-    // Scroll horizontal
-    function scrollDerecha() {
-      document.getElementById("galeria").scrollBy({ left: 200, behavior: 'smooth' });
-    }
+  let indice = 0;
+    const carrusel = document.getElementById("carrusel");
+    const total = document.querySelectorAll(".producto").length;
 
-    function scrollIzquierda() {
-      document.getElementById("galeria").scrollBy({ left: -200, behavior: 'smooth' });
-    }
+    function moverCarrusel(direccion) {
+      indice += direccion;
+      if (indice < 0) indice = 0;
+      if (indice >= total) indice = total - 1;
 
+      const desplazamiento = -indice * 300; // ancho del contenedor
+      carrusel.style.transform = `translateX(${desplazamiento}px)`;
+    }
     // Función para enviar a WhatsApp
     function irAWhatsapp(producto) {
       const mensaje = `Nombre: Introducir nombre%0A` +
